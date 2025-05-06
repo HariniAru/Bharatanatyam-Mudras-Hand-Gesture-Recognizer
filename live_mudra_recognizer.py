@@ -1,7 +1,10 @@
 import cv2
 import mediapipe as mp
 import numpy as np
-from mudra_rules import is_pataka
+
+# from mudra_rules import is_pataka, is_tripataka
+# from mudra_rules import *
+import mudra_rules
 
 # Setup MediaPipe
 mp_hands = mp.solutions.hands
@@ -34,10 +37,12 @@ while True:
 
             landmarks = np.array([[lm.x, lm.y, lm.z] for lm in hand_landmarks.landmark], dtype=np.float32)
 
-            if is_pataka(landmarks):
+            if mudra_rules.is_pataka(landmarks):
                 label = "Detected: Pataka ✅"
+            elif mudra_rules.is_tripataka(landmarks):
+                label = "Detected: Tripataka ✅"
             else:
-                label = "Detected: Unknown ❌"
+                label = "Unknown ❌"
 
     # Draw label on frame
     cv2.putText(frame, label, (10, 30),

@@ -1,0 +1,35 @@
+import os
+import numpy as np
+
+# MediaPipe Hand Landmarks index groups
+FINGER_INDICES = {
+    "Thumb": [1, 2, 3, 4],
+    "Index": [5, 6, 7, 8],
+    "Middle": [9, 10, 11, 12],
+    "Ring": [13, 14, 15, 16],
+    "Pinky": [17, 18, 19, 20],
+    "Wrist": [0]
+}
+
+data_dir = "mudra_data"
+
+for mudra_folder in os.listdir(data_dir):
+    folder_path = os.path.join(data_dir, mudra_folder)
+    if not os.path.isdir(folder_path):
+        continue
+
+    print(f"\n=== Mudra: {mudra_folder} ===")
+
+    for file in sorted(os.listdir(folder_path)):
+        if file.endswith(".npy"):
+            path = os.path.join(folder_path, file)
+            landmarks = np.load(path)
+
+            print(f"\nSample: {file}")
+            print(f"Shape: {landmarks.shape}")
+
+            for finger, indices in FINGER_INDICES.items():
+                print(f"  {finger}:")
+                for idx in indices:
+                    x, y, z = landmarks[idx]
+                    print(f"    [{idx}] x={x:.4f}, y={y:.4f}, z={z:.4f}")
