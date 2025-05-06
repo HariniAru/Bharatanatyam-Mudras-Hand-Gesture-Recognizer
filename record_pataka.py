@@ -1,0 +1,68 @@
+import cv2
+import mediapipe as mp
+import numpy as np
+import os
+
+# === CONFIG ===
+MUDRA_LABEL = "pataka"
+SAVE_DIR = f"mudra_data/{MUDRA_LABEL}"
+os.makedirs(SAVE_DIR, exist_ok=True)
+
+# === MediaPipe Setup ===
+mp_hands = mp.solutions.hands
+mp_drawing = mp.solutions.drawing_utils
+
+hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1,
+                       min_detection_confidence=0.7, min_tracking_confidence=0.7)
+
+cap = cv2.VideoCapture(1, cv2.CAP_AVFOUNDATION)
+if not cap.isOpened():
+    print("Webcam error")
+    exit()
+
+sample_count = len(os.listdir(SAVE_DIR))
+print(f"Recording for mudra: {MUDRA_LABEL}")
+print("Hold your hand in position, then press 's' to save, or 'q' to quit.")
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        continue
+
+    frame = cv2.flip(frame, 1)
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(rgb)
+
+    key = cv2.waitKey(1) & 0xFF
+
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            # Draw landmarks
+            mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+            # Convert landmarks to numpy array
+            landmark_array = np.array(
+                [[lm.x, lm.y, lm.z] for lm in hand_landmarks.landmark],
+                dtype=np.float32
+            )
+
+            # Save when 's' is pressed
+            if key == ord('s'):
+                filename = f"{MUDRA_LABEL}_{sample_count:03d}.npy"
+                np.save(os.path.join(SAVE_DIR, filename), landmark_array)
+                print(f"✅ Saved: {filename}")
+                sample_count += 1
+
+    # Overlay label
+    cv2.putText(frame, f"Mudra: {MUDRA_LABEL} | Samples: {sample_count}",
+                (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+
+    cv2.imshow("Record Mudra: Pataka", frame)
+
+    if key == ord('q') or key == 27:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+hands.close()
+print("👋 Done recording.")
