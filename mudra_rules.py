@@ -253,3 +253,40 @@ def is_ardhapataka(landmarks: np.ndarray) -> bool:
 #         return False
 
 #     return True
+
+
+
+def is_mushti(landmarks: np.ndarray) -> bool:
+    def vector(a, b):
+        return np.array(b) - np.array(a)
+
+    def angle_between(v1, v2):
+        cos_angle = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+        cos_angle = np.clip(cos_angle, -1.0, 1.0)
+        return np.degrees(np.arccos(cos_angle))
+
+    # Fingers to check
+    finger_names = ["Index", "Middle", "Ring", "Pinky"]
+    finger_tips = [8, 12, 16, 20]
+    finger_pips = [6, 10, 14, 18]
+
+    bent_fingers = 0
+    for name, tip, pip in zip(finger_names, finger_tips, finger_pips):
+        v1 = vector(landmarks[pip], landmarks[pip - 1])  # MCP to PIP
+        v2 = vector(landmarks[tip], landmarks[pip])      # TIP to PIP
+        angle = angle_between(v1, v2)
+        print(f"{name} finger bend angle = {angle:.2f}")
+        if angle > 40:  # was 60; lowered threshold based on real data
+            bent_fingers += 1
+
+    if bent_fingers < 4:
+        return False
+
+    # Thumb: should be bent and slightly crossing over (moderate angle)
+    wrist = landmarks[0]
+    thumb_base = landmarks[2]
+    thumb_tip = landmarks[4]
+    thumb_angle = angle_between(vector(wrist, thumb_base), vector(thumb_base, thumb_tip))
+    print(f"Thumb bend angle = {thumb_angle:.2f}")
+
+    return 40 < thumb_angle < 100

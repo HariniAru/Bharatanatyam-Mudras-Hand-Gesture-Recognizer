@@ -7,8 +7,9 @@ import os
 # MUDRA_LABEL = "pataka"
 # MUDRA_LABEL = "tripataka"
 # MUDRA_LABEL = "ardhapataka"
+# MUDRA_LABEL = "mushti"
 
-MUDRA_LABEL = "ardhapataka"
+MUDRA_LABEL = "mushti"
 SAVE_DIR = f"mudra_data/{MUDRA_LABEL}"
 os.makedirs(SAVE_DIR, exist_ok=True)
 

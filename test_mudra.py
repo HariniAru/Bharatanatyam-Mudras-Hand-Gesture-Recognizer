@@ -4,13 +4,14 @@ import numpy as np
 import mudra_rules
 
 # Set which mudra you want to test
-MUDRA_NAME = "ardhapataka"  # change to "tripataka" or "ardhapataka"
+MUDRA_NAME = "mushti"  # change to "tripataka" or "ardhapataka"
 
 # Mapping of mudra name to function
 mudra_functions = {
     "pataka": mudra_rules.is_pataka,
     "tripataka": mudra_rules.is_tripataka,
     "ardhapataka": mudra_rules.is_ardhapataka
+    "mushti": mudra_rules.is_mushti
 }
 
 # Select the function

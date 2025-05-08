@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 
 # Set the folder you want to preview
-MUDRA_FOLDER = "mudra_data/ardhapataka"  # <-- change if needed
+MUDRA_FOLDER = "mudra_data/mushti"  # <-- change if needed
 
 # Helper to draw 2D skeleton
 HAND_CONNECTIONS = [

@@ -2,7 +2,7 @@ import os
 import numpy as np
 
 # ✅ Set the mudra you want to inspect
-MUDRA_NAME = "ardhapataka"
+MUDRA_NAME = "mushti"
 GESTURE_PATH = os.path.join("mudra_data", MUDRA_NAME)
 OUTPUT_FILE = f"{MUDRA_NAME}_landmarks.txt"
 
