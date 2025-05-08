@@ -73,4 +73,4 @@ pip freeze > requirements.txt
 
 
 Report notes:
-in report, talk about why you shifted from a rule-based classifier to a RandomForestClassifier
+in report, talk about why you shifted from a rule-based classifier to a RandomForestClassifier (it was hard to code out rules )
