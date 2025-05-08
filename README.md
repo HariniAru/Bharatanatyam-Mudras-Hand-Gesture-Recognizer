@@ -50,9 +50,27 @@ If you *really* want to include rotated views (e.g., for robustness), do so late
 
 
 
+Tools You Can Use (All in Python):
+
+Tool	Use Case
+scikit-learn	Train ML models on features (angles, vectors)
+NumPy / Pandas	Prepare and structure your dataset
+MediaPipe	Already used — gives the hand landmarks
+Optional: PyTorch / TensorFlow	For deep learning (not needed now)
+
+
+
+
+
+
 
 
 pip install mediapipe opencv-python numpy
 pip install cv2
 pip install scikit-learn joblib numpy
 pip freeze > requirements.txt                       
+
+
+
+Report notes:
+in report, talk about why you shifted from a rule-based classifier to a RandomForestClassifier

@@ -9,7 +9,21 @@ import os
 # MUDRA_LABEL = "ardhapataka"
 # MUDRA_LABEL = "mushti"
 
-MUDRA_LABEL = "mushti"
+import sys
+
+# MUDRA_LABEL = "mushti"
+
+# Check if gesture name is provided
+if len(sys.argv) < 2:
+    print("❌ Usage: python record_mudra.py <MUDRA_LABEL>")
+    sys.exit(1)
+
+if (sys.argv[1]):
+    MUDRA_LABEL = sys.argv[1]
+else:
+    MUDRA_LABEL = "mushti"
+print(f"📸 Recording gesture: {MUDRA_LABEL}")
+
 SAVE_DIR = f"mudra_data/{MUDRA_LABEL}"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
