@@ -97,7 +97,8 @@ mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7, min_tracking_confidence=0.7)
 
-cap = cv2.VideoCapture(1, cv2.CAP_AVFOUNDATION)
+# cap = cv2.VideoCapture(1, cv2.CAP_AVFOUNDATION)
+cap = cv2.VideoCapture(0, cv2.CAP_AVFOUNDATION)
 print("🧠 Live Mudra Recognizer Started — press 'q' to quit.")
 
 while True:
