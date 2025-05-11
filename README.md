@@ -6,6 +6,20 @@ The system identifies classical hand gestures using 3D hand pose landmarks and a
 
 ---
 
+## How It Works
+
+MediaPipe detects 21 3D landmarks for the hand in each frame.
+
+The system extracts meaningful features:
+- PIP joint angles (bending of index, middle, ring, pinky)
+- Thumb angle (wrist → base → tip)
+
+These features are passed to a machine learning model (Random Forest) trained on labeled gestures.
+
+During real-time webcam input, the same features are extracted and used to predict the current mudra.
+
+The result is displayed live on screen via OpenCV.
+
 ## Recognized Gestures
 
 The model is trained on the **first 14 gestures** from the [Asamyuta Hasta Mudras](https://www.natyasutraonline.com/picture-gallery/asamyuta-hasta-bharatanatyam) list:
@@ -99,17 +113,3 @@ This script will:
 - Save the trained model to **gesture_classifier.pkl**
 
 This model is automatically loaded in **live_mudra_recognizer.py** for real-time predictions.
-
-## How It Works
-
-MediaPipe detects 21 3D landmarks for the hand in each frame.
-
-The system extracts meaningful features:
-- PIP joint angles (bending of index, middle, ring, pinky)
-- Thumb angle (wrist → base → tip)
-
-These features are passed to a machine learning model (Random Forest) trained on labeled gestures.
-
-During real-time webcam input, the same features are extracted and used to predict the current mudra.
-
-The result is displayed live on screen via OpenCV.
