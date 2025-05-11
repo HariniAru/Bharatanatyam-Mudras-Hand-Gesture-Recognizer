@@ -1,7 +1,8 @@
+# Exports finger landmarks to a separate .txt file for easier readability
 import os
 import numpy as np
 
-# ✅ Set the mudra you want to inspect
+# provide mudra name
 MUDRA_NAME = "mushti"
 GESTURE_PATH = os.path.join("mudra_data", MUDRA_NAME)
 OUTPUT_FILE = f"{MUDRA_NAME}_landmarks.txt"
@@ -14,6 +15,7 @@ FINGER_INDICES = {
     "Pinky": [17, 18, 19, 20],
 }
 
+# create output file and write landmark info to output file
 with open(OUTPUT_FILE, "w") as f:
     f.write(f"=== Gesture: {MUDRA_NAME} ===\n")
 
@@ -35,4 +37,5 @@ with open(OUTPUT_FILE, "w") as f:
 
         f.write("-" * 40 + "\n")
 
-print(f"✅ Landmarks written to '{OUTPUT_FILE}'")
+# verification
+print(f"Landmarks written to '{OUTPUT_FILE}'")
