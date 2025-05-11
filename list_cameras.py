@@ -1,3 +1,4 @@
+# Lists available camera indices 
 import cv2
 
 print("Scanning camera indices...")

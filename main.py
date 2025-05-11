@@ -1,4 +1,4 @@
-# Tests whether opening webcam with MediaPipe works
+# Set up MediaPipe and access webcam with OpenCV
 import cv2
 import time
 import os
