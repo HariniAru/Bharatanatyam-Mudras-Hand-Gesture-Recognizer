@@ -1,26 +1,24 @@
+# Prints accuracy of mudra rules for a specified mudra
 import os
 import numpy as np
-# from mudra_rules import is_pataka, is_tripataka, is_ardhapataka
 import mudra_rules
 
-# Set which mudra you want to test
-MUDRA_NAME = "mushti"  # change to "tripataka" or "ardhapataka"
+# mudra to test rule for 
+MUDRA_NAME = "mushti" # modify this for different mudras
 
-# Mapping of mudra name to function
+# map mudra name to respective function from mudra_rules
 mudra_functions = {
     "pataka": mudra_rules.is_pataka,
     "tripataka": mudra_rules.is_tripataka,
-    "ardhapataka": mudra_rules.is_ardhapataka
+    "ardhapataka": mudra_rules.is_ardhapataka,
     "mushti": mudra_rules.is_mushti
+    # rest of mudras
 }
 
-# Select the function
 check_fn = mudra_functions[MUDRA_NAME]
-
-# Folder path
 folder_path = f"mudra_data/{MUDRA_NAME}"
 
-# Loop through files
+# loop through mudra samples
 for filename in sorted(os.listdir(folder_path)):
     if not filename.endswith(".npy"):
         continue
