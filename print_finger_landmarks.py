@@ -14,6 +14,7 @@ FINGER_INDICES = {
     "Middle": [9, 10, 11, 12],
     "Ring": [13, 14, 15, 16],
     "Pinky": [17, 18, 19, 20],
+    "Wrist": [0]
 }
 
 print(f"=== Gesture: {MUDRA_NAME} ===")

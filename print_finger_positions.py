@@ -1,7 +1,8 @@
+# Prints finger positions for each sample in mudra_data
 import os
 import numpy as np
 
-# MediaPipe Hand Landmarks index groups
+# finger landmark indices
 FINGER_INDICES = {
     "Thumb": [1, 2, 3, 4],
     "Index": [5, 6, 7, 8],
@@ -13,6 +14,7 @@ FINGER_INDICES = {
 
 data_dir = "mudra_data"
 
+# loop through each mudra sample and print finger positions
 for mudra_folder in os.listdir(data_dir):
     folder_path = os.path.join(data_dir, mudra_folder)
     if not os.path.isdir(folder_path):
