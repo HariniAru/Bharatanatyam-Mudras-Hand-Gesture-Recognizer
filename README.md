@@ -66,9 +66,15 @@ This should resolve issues related to incorrect camera selection.
 
 ## Train Your Own Model
 
-You can retrain the classifier using your own .npy samples:
+I recorded around You can retrain the classifier using your own .npy samples:
 
-1. Record samples using record_mudra.py, which saves (21, 3) NumPy arrays to:
+1. Record samples using record_mudra.py using:
+
+```bash
+python train_gesture_classifier.py <MUDRA_LABEL>
+```
+
+This saves (21, 3) NumPy arrays to:
 
 ```bash
 mudra_data/<gesture_name>/<gesture_name>_###.npy
