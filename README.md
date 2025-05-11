@@ -74,7 +74,7 @@ I recorded around You can retrain the classifier using your own .npy samples:
 python train_gesture_classifier.py <MUDRA_LABEL>
 ```
 
-This saves (21, 3) NumPy arrays to:
+Then press 's' to take a snapshot of your gesture (and 'q' when you're done). This saves (21, 3) NumPy arrays to:
 
 ```bash
 mudra_data/<gesture_name>/<gesture_name>_###.npy
