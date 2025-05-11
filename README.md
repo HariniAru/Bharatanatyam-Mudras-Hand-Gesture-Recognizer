@@ -80,12 +80,14 @@ This should resolve issues related to incorrect camera selection.
 
 ## Train Your Own Model
 
-I recorded around You can retrain the classifier using your own .npy samples:
+I recorded at least 15 .npy samples for each gesture.
+
+You can retrain the classifier using your own .npy samples:
 
 1. Record samples using record_mudra.py using:
 
 ```bash
-python train_gesture_classifier.py <MUDRA_LABEL>
+python record_mudra.py <MUDRA_LABEL>
 ```
 
 Then press 's' to take a snapshot of your gesture (and 'q' when you're done). This saves (21, 3) NumPy arrays to:
@@ -113,3 +115,6 @@ This script will:
 - Save the trained model to **gesture_classifier.pkl**
 
 This model is automatically loaded in **live_mudra_recognizer.py** for real-time predictions.
+
+## Visualize Gestures
+
