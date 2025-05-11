@@ -1,3 +1,4 @@
+# Trains RandomForestClassifier model on mudra data
 import os
 import numpy as np
 import joblib
@@ -43,6 +44,7 @@ def load_dataset(data_dir="mudra_data"):
             y.append(gesture)
     return np.array(X), np.array(y)
 
+# prints out classification report for each gesture along with different parameters and model accuracy
 def main():
     X, y = load_dataset()
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -52,7 +54,7 @@ def main():
     print("=== Classification Report ===")
     print(classification_report(y_test, y_pred))
     joblib.dump(clf, "gesture_classifier.pkl")
-    print("✅ Model saved as 'gesture_classifier.pkl'")
+    print("Model saved as 'gesture_classifier.pkl'")
 
 if __name__ == "__main__":
     main()
