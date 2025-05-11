@@ -119,7 +119,7 @@ This script will:
 - Extract joint angle features from the landmark data
 - Train a **RandomForestClassifier** using scikit-learn
 - Save the trained model to **gesture_classifier.pkl**
-- Print a classification report that quantifies the accuracy of the trained model. 
+- Print a classification report that quantifies the accuracy of the trained model
 
 This model is automatically loaded in **live_mudra_recognizer.py** for real-time predictions.
 
