@@ -7,8 +7,8 @@ import sys
 # check if mudra name is provided
 if (len(sys.argv) < 2):
     print("Usage: python preview_mudra_samples.py <MUDRA_LABEL>\n")
-    print("Please provide the name of the mudra after the command.")
-    print("Example: python preview_mudra_samples.py mushti")
+    print("Please provide the name of the mudra you want to preview after the command.")
+    print("(Example: python preview_mudra_samples.py mushti)\n")
     sys.exit(1)
 
 if (sys.argv[1]):
