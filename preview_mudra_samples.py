@@ -1,11 +1,26 @@
+# Preview all samples in data folder for a specific mudra
 import os
 import numpy as np
 import cv2
+import sys
 
-# Set the folder you want to preview
-MUDRA_FOLDER = "mudra_data/mushti"  # <-- change if needed
+# check if mudra name is provided
+if (len(sys.argv) < 2):
+    print("Usage: python preview_mudra_samples.py <MUDRA_LABEL>\n")
+    print("Please provide the name of the mudra after the command.")
+    print("Example: python preview_mudra_samples.py mushti")
+    sys.exit(1)
 
-# Helper to draw 2D skeleton
+if (sys.argv[1]):
+    MUDRA_LABEL = sys.argv[1]
+else:
+    MUDRA_LABEL = "mushti" # default 
+
+# set folder
+MUDRA_FOLDER = "mudra_data/" + MUDRA_LABEL
+# MUDRA_FOLDER = "mudra_data/mushti"
+
+# 2D hand skeleton
 HAND_CONNECTIONS = [
     (0,1), (1,2), (2,3), (3,4),      # Thumb
     (0,5), (5,6), (6,7), (7,8),      # Index
@@ -15,6 +30,7 @@ HAND_CONNECTIONS = [
     (0,17)  # Palm arc
 ]
 
+# to draw the hand outline
 def draw_hand(image, landmarks):
     h, w = image.shape[:2]
     for i, (x, y, z) in enumerate(landmarks):
@@ -26,7 +42,7 @@ def draw_hand(image, landmarks):
         cv2.line(image, (x0, y0), (x1, y1), (255, 0, 0), 2)
     return image
 
-# Load and preview each file
+# load each sample fiile
 for filename in sorted(os.listdir(MUDRA_FOLDER)):
     if not filename.endswith(".npy"):
         continue
@@ -34,17 +50,17 @@ for filename in sorted(os.listdir(MUDRA_FOLDER)):
     filepath = os.path.join(MUDRA_FOLDER, filename)
     landmarks = np.load(filepath)
 
-    # Create a blank image
+    # create canvas
     canvas = np.ones((480, 480, 3), dtype=np.uint8) * 255
     canvas = draw_hand(canvas, landmarks)
 
-    cv2.putText(canvas, filename, (10, 30),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 2)
+    cv2.putText(canvas, filename, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 2)
 
     cv2.imshow("Preview", canvas)
-    # key = cv2.waitKey(0) # you gotta manually press a key to transition for this
+    # key = cv2.waitKey(0) # manually press a key to transition for this
     key = cv2.waitKey(1000)  # 1000 ms = 1 second per frame
-    if key == ord('q') or key == 27:  # ESC or 'q' to quit
+    if (key == ord('q') or key == 27):  # ESC or 'q' to quit
         break
 
+# for exiting
 cv2.destroyAllWindows()
