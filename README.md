@@ -1,5 +1,3 @@
-# cs445_finalproject
-
 # Bharatanatyam Mudra Classifier
 
 This project is a real-time hand gesture recognition system for **Bharatanatyam Mudras (Hand Gestures)**, built using **MediaPipe**, **OpenCV**, and **scikit-learn**.
