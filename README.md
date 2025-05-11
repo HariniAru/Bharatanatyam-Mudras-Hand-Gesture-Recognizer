@@ -78,6 +78,12 @@ cap = cv2.VideoCapture(0)
 
 This should resolve issues related to incorrect camera selection.
 
+If you want to figure out which camera index is available to you, you can run: 
+
+```bash
+python list_cameras.py
+```
+
 ## Train Your Own Model
 
 I recorded at least 15 .npy samples for each gesture.
