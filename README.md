@@ -118,3 +118,21 @@ This model is automatically loaded in **live_mudra_recognizer.py** for real-time
 
 ## Visualize Gestures
 
+To visualize the .npy samples you’ve recorded for a given gesture, you can run:
+
+```bash
+python preview_mudra_samples.py <MUDRA_LABEL>
+```
+
+Example:
+
+```bash
+python preview_mudra_samples.py suchi
+```
+
+This will:
+- Display each saved frame as a 2D hand skeleton
+- Show one sample per second
+- Automatically exit on pressing q or Esc
+
+Make sure the folder mudra_data/<gesture_name>/ exists and contains .npy files.
