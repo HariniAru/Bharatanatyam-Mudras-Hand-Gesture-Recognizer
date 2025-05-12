@@ -60,6 +60,7 @@ pip freeze > requirements.txt
 To launch the real-time gesture recognizer:
 
 ```bash
+pip install -r requirements.txt # to ensure you have all dependencies installed
 python live_mudra_recognizer.py
 ```
 
