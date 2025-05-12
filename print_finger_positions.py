@@ -15,6 +15,7 @@ FINGER_INDICES = {
 data_dir = "mudra_data"
 
 # loop through each mudra sample and print finger positions
+num_samples = 0
 for mudra_folder in os.listdir(data_dir):
     folder_path = os.path.join(data_dir, mudra_folder)
     if not os.path.isdir(folder_path):
@@ -24,6 +25,7 @@ for mudra_folder in os.listdir(data_dir):
 
     for file in sorted(os.listdir(folder_path)):
         if file.endswith(".npy"):
+            num_samples += 1
             path = os.path.join(folder_path, file)
             landmarks = np.load(path)
 
@@ -35,3 +37,6 @@ for mudra_folder in os.listdir(data_dir):
                 for idx in indices:
                     x, y, z = landmarks[idx]
                     print(f"    [{idx}] x={x:.4f}, y={y:.4f}, z={z:.4f}")
+
+print("\n")
+print("Evaluated for a total of", num_samples, "samples in mudra_data")
