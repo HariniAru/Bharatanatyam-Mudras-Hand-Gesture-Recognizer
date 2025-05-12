@@ -46,7 +46,7 @@ The model is trained on the **first 14 gestures** from the [Asamyuta Hasta Mudra
 Make sure you have the following Python packages installed:
 
 ```bash
-pip install mediapipe opencv-python scikit-learn numpy joblib cv2
+pip install mediapipe opencv-python scikit-learn numpy joblib
 ```
 
 I also ran this to generate the requirements.txt file:
