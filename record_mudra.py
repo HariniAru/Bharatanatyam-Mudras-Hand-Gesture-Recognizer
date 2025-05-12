@@ -66,7 +66,7 @@ while True:
             if key == ord('s'):
                 filename = f"{MUDRA_LABEL}_{sample_count:03d}.npy"
                 np.save(os.path.join(SAVE_DIR, filename), landmark_array)
-                print(f"✅ Saved: {filename}")
+                print(f"Saved: {filename}")
                 sample_count += 1
 
     cv2.putText(frame, f"Mudra: {MUDRA_LABEL} | Samples: {sample_count}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
