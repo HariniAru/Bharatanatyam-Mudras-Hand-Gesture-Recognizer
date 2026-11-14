@@ -1,26 +1,37 @@
-# Bharatanatyam Mudra Classifier
+# Bharatanatyam Mudra Recognizer
 
-This project is a real-time hand gesture recognition system for **Bharatanatyam Mudras (Hand Gestures)**, built using **MediaPipe**, **OpenCV**, and **scikit-learn**.
+A real-time computer vision tool that recognizes **Bharatanatyam mudras** (classical Indian dance hand gestures) from a webcam and shows the mudra's name live on screen. Built with **MediaPipe**, **OpenCV**, and **scikit-learn**.
 
-The system identifies classical hand gestures using 3D hand pose landmarks and a trained Random Forest classifier.
+**Results:** 89% accuracy and a 0.88 macro F1-score across 14 mudras, trained on a dataset of 231 samples I recorded myself.
 
-[Here is my demo video!](https://drive.google.com/file/d/1x13j0s3KFnbkX-vKbxNR3zUE-gk6vo-2/view?usp=share_link)
+[Watch the demo video](https://drive.google.com/file/d/1x13j0s3KFnbkX-vKbxNR3zUE-gk6vo-2/view?usp=share_link) · [Read the final report](https://docs.google.com/document/d/1sTDlDQG-pkDBUVVw8cXcZmhpct04P3zRY4-Glf5PNG4/edit?usp=sharing)
 
 ---
 
+## Why I Built This
+
+I started learning Bharatanatyam as a young child, and I still remember how long it took to get each mudra right: shaping my fingers just so, moving smoothly between gestures, and learning what each one means. For a beginner, it can be overwhelming.
+
+This project brings that experience together with computer vision. It helps learners practice mudras accurately and learn their names, and it's a small step toward preserving a cultural art form through technology.
+
+## Tech Stack
+
+- **Python**
+- **MediaPipe:** hand landmark detection (21 landmarks per hand)
+- **OpenCV:** webcam capture and live display
+- **scikit-learn:** Random Forest classifier
+- **NumPy** and **joblib:** data handling and model persistence
+
 ## How It Works
 
-MediaPipe detects 21 3D landmarks for the hand in each frame.
+1. MediaPipe detects 21 3D landmarks on the hand in each webcam frame.
+2. The system turns those landmarks into joint-angle features:
+   - Four PIP joint angles (how much the index, middle, ring, and pinky fingers bend)
+   - A custom thumb angle (wrist → thumb base → thumb tip)
+3. A Random Forest classifier, trained on my labeled samples, predicts the mudra from those features.
+4. OpenCV displays the predicted mudra name on the live video.
 
-The system extracts meaningful features:
-- PIP joint angles (bending of index, middle, ring, pinky)
-- Thumb angle (wrist → base → tip)
-
-These features are passed to a machine learning model (Random Forest) trained on labeled gestures.
-
-During real-time webcam input, the same features are extracted and used to predict the current mudra.
-
-The result is displayed live on screen via OpenCV.
+Angles describe the shape of the hand rather than where it is in the frame, so the same mudra is recognized whether your hand is closer, farther, or off to the side.
 
 ## Recognized Gestures
 
@@ -42,6 +53,31 @@ The model is trained on the **first 14 gestures** from the [Asamyuta Hasta Mudra
 14. Chandrakala  
 
 ---
+
+## Results
+
+The classifier was evaluated on a dataset of **231 gesture samples across 14 mudras** (at least 15 per mudra), using an 80/20 train/test split.
+
+| Metric | Score |
+| --- | --- |
+| Accuracy | **89%** |
+| Macro F1-score | **0.88** |
+
+- **Perfect scores:** Mushti, Suchi, Kapittha, Chandrakala, and Shikhara reached 1.0 precision, recall, and F1. The joint-angle features separate these clearly.
+- **Strong:** Katakamukha, Mayura, and Pataka scored around 0.75–0.89 in precision and recall.
+- **Hardest:** Ardhapataka had high recall but low precision (F1 0.50), and Shukatundaka and Kartarimukha scored lower in precision or recall. These mudras differ from their neighbors only in subtle finger positions.
+
+## Challenges and Design Decisions
+
+- **Custom landmarks instead of a pre-built recognizer:** MediaPipe's built-in gesture recognizer only knows common gestures like a thumbs-up, so I used its hand landmark model and engineered my own features for Bharatanatyam.
+- **From hand-written rules to machine learning:** I first tried a rule-based classifier that mapped finger positions and angles by hand. It became too complex and inaccurate for mudras with subtle differences, so I switched to a Random Forest. It works well on a small dataset, handles those subtle differences, and makes accuracy easy to measure.
+- **Re-recording the dataset:** MediaPipe is mostly trained on front-facing palms with clearly separated fingers. Many mudras don't look like that, so I re-recorded much of my dataset with higher-quality samples to improve accuracy.
+
+## Future Work
+
+- Collect more samples per mudra, recorded from consistent angles
+- Try SVMs or neural networks, and add features that capture movement
+- Expand to motion-based recognition, two-handed (Samyuta) mudras, and full-body pose tracking
 
 ## Dependencies
 
